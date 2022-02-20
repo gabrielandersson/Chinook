@@ -1,0 +1,15 @@
+C:\Users\ander\source\repos\Chinook\Chinook.Domain\bin\Debug\net5.0\Chinook.Domain.deps.json
+C:\Users\ander\source\repos\Chinook\Chinook.Domain\bin\Debug\net5.0\Chinook.Domain.runtimeconfig.json
+C:\Users\ander\source\repos\Chinook\Chinook.Domain\bin\Debug\net5.0\Chinook.Domain.runtimeconfig.dev.json
+C:\Users\ander\source\repos\Chinook\Chinook.Domain\bin\Debug\net5.0\Chinook.Domain.dll
+C:\Users\ander\source\repos\Chinook\Chinook.Domain\bin\Debug\net5.0\Chinook.Domain.pdb
+C:\Users\ander\source\repos\Chinook\Chinook.Domain\obj\Debug\net5.0\Chinook.Domain.csproj.AssemblyReference.cache
+C:\Users\ander\source\repos\Chinook\Chinook.Domain\obj\Debug\net5.0\Chinook.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ander\source\repos\Chinook\Chinook.Domain\obj\Debug\net5.0\Chinook.Domain.AssemblyInfoInputs.cache
+C:\Users\ander\source\repos\Chinook\Chinook.Domain\obj\Debug\net5.0\Chinook.Domain.AssemblyInfo.cs
+C:\Users\ander\source\repos\Chinook\Chinook.Domain\obj\Debug\net5.0\Chinook.Domain.csproj.CoreCompileInputs.cache
+C:\Users\ander\source\repos\Chinook\Chinook.Domain\obj\Debug\net5.0\Chinook.Domain.dll
+C:\Users\ander\source\repos\Chinook\Chinook.Domain\obj\Debug\net5.0\refint\Chinook.Domain.dll
+C:\Users\ander\source\repos\Chinook\Chinook.Domain\obj\Debug\net5.0\Chinook.Domain.pdb
+C:\Users\ander\source\repos\Chinook\Chinook.Domain\obj\Debug\net5.0\Chinook.Domain.genruntimeconfig.cache
+C:\Users\ander\source\repos\Chinook\Chinook.Domain\obj\Debug\net5.0\ref\Chinook.Domain.dll
