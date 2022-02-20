@@ -13,7 +13,7 @@ namespace Chinook.Domain.Models
         public decimal UnitPrice { get; set; }
         public int Quantity { get; set; }
 
-        public virtual Invoice Invoice { get; set; }
-        public virtual Track Track { get; set; }
+        public virtual Invoice Invoice { get; set; }  // to invoice
+        public virtual Track Track { get; set; }  
     }
 }

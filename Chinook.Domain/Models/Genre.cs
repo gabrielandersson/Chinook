@@ -15,6 +15,6 @@ namespace Chinook.Domain.Models
         public int GenreId { get; set; }
         public string Name { get; set; }
 
-        public virtual ICollection<Track> Tracks { get; set; }
+        public virtual ICollection<Track> Tracks { get; set; } // to tracks
     }
 }

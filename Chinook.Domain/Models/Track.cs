@@ -17,7 +17,7 @@ namespace Chinook.Domain.Models
         public string Name { get; set; }
         public int? AlbumId { get; set; }
         public int MediaTypeId { get; set; }
-        public int? GenreId { get; set; }
+        public int? GenreId { get; set; }  
         public string Composer { get; set; }
         public int Milliseconds { get; set; }
         public int? Bytes { get; set; }
@@ -26,7 +26,7 @@ namespace Chinook.Domain.Models
         public virtual Album Album { get; set; }
         public virtual Genre Genre { get; set; }
         public virtual MediaType MediaType { get; set; }
-        public virtual ICollection<InvoiceLine> InvoiceLines { get; set; }
+        public virtual ICollection<InvoiceLine> InvoiceLines { get; set; }  // to InvoiceLines
         public virtual ICollection<PlaylistTrack> PlaylistTracks { get; set; }
     }
 }
