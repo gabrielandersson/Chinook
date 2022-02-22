@@ -3,8 +3,8 @@ using Chinook.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
-#nullable disable
 
+//So i have used a db first approach here,  
 namespace Chinook.Data
 {
     public partial class ChinookContext : DbContext
@@ -17,7 +17,6 @@ namespace Chinook.Data
             : base(options)
         {
         }
-
         public virtual DbSet<Album> Albums { get; set; }
         public virtual DbSet<Artist> Artists { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
@@ -29,20 +28,27 @@ namespace Chinook.Data
         public virtual DbSet<Playlist> Playlists { get; set; }
         public virtual DbSet<PlaylistTrack> PlaylistTracks { get; set; }
         public virtual DbSet<Track> Tracks { get; set; }
-        
+
+        /// <summary>
+        /// Here i have used a logger/filter and called on a method called EnableSensitiveDataLogging in order to
+        /// see what SQL EFCore translates my code into, very handy, very neat ^^ 
+        /// </summary>
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
                 optionsBuilder.UseSqlServer(
                     "Data Source=LAPTOP-AWZUM\\SQLEXPRESS;Initial Catalog=Chinook;Integrated Security=True;")
-                    .LogTo(Console.WriteLine,new[] {DbLoggerCategory.Database.Command.Name}, LogLevel.Information)
+                    .LogTo(Console.WriteLine, new[] { DbLoggerCategory.Database.Command.Name }, LogLevel.Information)
                     .EnableSensitiveDataLogging();
-
-
             }
         }
-
+       /// <summary>
+       /// With the OnModelCreating i can modify such things as which properties that should be enforced to include
+       /// when creating a new instance of a model. Herein we also specify things as which table the entity maps to and
+       /// how the relationships between the tables look.
+       /// </summary>
+       /// <param name="modelBuilder"></param>
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasAnnotation("Relational:Collation", "SQL_Latin1_General_CP1_CI_AS");
