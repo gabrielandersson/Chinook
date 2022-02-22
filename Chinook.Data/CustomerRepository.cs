@@ -204,16 +204,16 @@ namespace Chinook.Data
                 $"SELECT TOP 1 WITH TIES genre.Name, genre.GenreId ,COUNT(*) AS NumInEachGenre\r\nFROM Genre\r\nJOIN Track ON genre.GenreId = Track.GenreId\r\nJOIN InvoiceLine ON Track.TrackId = InvoiceLine.InvoiceLineId\r\nJOIN Invoice ON InvoiceLine.InvoiceId = Invoice.InvoiceId\r\nJOIN Customer ON Invoice.CustomerId = Customer.CustomerId\r\nWHERE Customer.CustomerId = {id}\r\nGROUP BY genre.GenreId, Genre.Name\r\nORDER BY NumInEachGenre DESC").ToList();
             if (sql.Count == 0)
             {
-                Console.WriteLine("Sorry, the customer haven't bought anything!");
+                Console.WriteLine("\nSorry, the customer haven't bought anything!");
                 return sql;
             }
             if (sql.Count() == 2)
             {
-                Console.WriteLine("Customers favorite genre is both: {0} and {1}", sql[0].Name, sql[1].Name);
+                Console.WriteLine("\nCustomers favorite genre is both: {0} and {1}", sql[0].Name, sql[1].Name);
             }
             else
             {
-                Console.WriteLine("Customers most popular genre is: {0}", sql[0].Name);
+                Console.WriteLine("\nCustomers most popular genre is: {0}", sql[0].Name);
             }
             return sql;
         }

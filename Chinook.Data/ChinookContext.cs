@@ -17,16 +17,10 @@ namespace Chinook.Data
             : base(options)
         {
         }
-        public virtual DbSet<Album> Albums { get; set; }
-        public virtual DbSet<Artist> Artists { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
-        public virtual DbSet<Employee> Employees { get; set; }
         public virtual DbSet<Genre> Genres { get; set; }
         public virtual DbSet<Invoice> Invoices { get; set; }
         public virtual DbSet<InvoiceLine> InvoiceLines { get; set; }
-        public virtual DbSet<MediaType> MediaTypes { get; set; }
-        public virtual DbSet<Playlist> Playlists { get; set; }
-        public virtual DbSet<PlaylistTrack> PlaylistTracks { get; set; }
         public virtual DbSet<Track> Tracks { get; set; }
 
         /// <summary>
@@ -43,39 +37,17 @@ namespace Chinook.Data
                     .EnableSensitiveDataLogging();
             }
         }
-       /// <summary>
-       /// With the OnModelCreating i can modify such things as which properties that should be enforced to include
-       /// when creating a new instance of a model. Herein we also specify things as which table the entity maps to and
-       /// how the relationships between the tables look.
-       /// </summary>
-       /// <param name="modelBuilder"></param>
+        /// <summary>
+        /// With the OnModelCreating i can modify such things as which properties that should be enforced to include
+        /// when creating a new instance of a model. Herein we also specify things as which table the entity maps to and
+        /// how the relationships between the tables look.
+        /// </summary>
+        /// <param name="modelBuilder"></param>
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasAnnotation("Relational:Collation", "SQL_Latin1_General_CP1_CI_AS");
 
-            modelBuilder.Entity<Album>(entity =>
-            {
-                entity.ToTable("Album");
 
-                entity.HasIndex(e => e.ArtistId, "IFK_AlbumArtistId");
-
-                entity.Property(e => e.Title)
-                    .IsRequired()
-                    .HasMaxLength(160);
-
-                entity.HasOne(d => d.Artist)
-                    .WithMany(p => p.Albums)
-                    .HasForeignKey(d => d.ArtistId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_AlbumArtistId");
-            });
-
-            modelBuilder.Entity<Artist>(entity =>
-            {
-                entity.ToTable("Artist");
-
-                entity.Property(e => e.Name).HasMaxLength(120);
-            });
 
             modelBuilder.Entity<Customer>(entity =>
             {
@@ -102,53 +74,6 @@ namespace Chinook.Data
                 entity.Property(e => e.Phone).HasMaxLength(24);
 
                 entity.Property(e => e.PostalCode).HasMaxLength(10);
-
-                entity.HasOne(d => d.SupportRep)
-                    .WithMany(p => p.Customers)
-                    .HasForeignKey(d => d.SupportRepId)
-                    .HasConstraintName("FK_CustomerSupportRepId");
-            });
-
-            modelBuilder.Entity<Employee>(entity =>
-            {
-                entity.ToTable("Employee");
-
-                entity.HasIndex(e => e.ReportsTo, "IFK_EmployeeReportsTo");
-
-                entity.Property(e => e.Address).HasMaxLength(70);
-
-                entity.Property(e => e.BirthDate).HasColumnType("datetime");
-
-                entity.Property(e => e.City).HasMaxLength(40);
-
-                entity.Property(e => e.Country).HasMaxLength(40);
-
-                entity.Property(e => e.Email).HasMaxLength(60);
-
-                entity.Property(e => e.Fax).HasMaxLength(24);
-
-                entity.Property(e => e.FirstName)
-                    .IsRequired()
-                    .HasMaxLength(20);
-
-                entity.Property(e => e.HireDate).HasColumnType("datetime");
-
-                entity.Property(e => e.LastName)
-                    .IsRequired()
-                    .HasMaxLength(20);
-
-                entity.Property(e => e.Phone).HasMaxLength(24);
-
-                entity.Property(e => e.PostalCode).HasMaxLength(10);
-
-                entity.Property(e => e.State).HasMaxLength(40);
-
-                entity.Property(e => e.Title).HasMaxLength(30);
-
-                entity.HasOne(d => d.ReportsToNavigation)
-                    .WithMany(p => p.InverseReportsToNavigation)
-                    .HasForeignKey(d => d.ReportsTo)
-                    .HasConstraintName("FK_EmployeeReportsTo");
             });
 
             modelBuilder.Entity<Genre>(entity =>
@@ -208,42 +133,6 @@ namespace Chinook.Data
                     .HasConstraintName("FK_InvoiceLineTrackId");
             });
 
-            modelBuilder.Entity<MediaType>(entity =>
-            {
-                entity.ToTable("MediaType");
-
-                entity.Property(e => e.Name).HasMaxLength(120);
-            });
-
-            modelBuilder.Entity<Playlist>(entity =>
-            {
-                entity.ToTable("Playlist");
-
-                entity.Property(e => e.Name).HasMaxLength(120);
-            });
-
-            modelBuilder.Entity<PlaylistTrack>(entity =>
-            {
-                entity.HasKey(e => new { e.PlaylistId, e.TrackId })
-                    .IsClustered(false);
-
-                entity.ToTable("PlaylistTrack");
-
-                entity.HasIndex(e => e.TrackId, "IFK_PlaylistTrackTrackId");
-
-                entity.HasOne(d => d.Playlist)
-                    .WithMany(p => p.PlaylistTracks)
-                    .HasForeignKey(d => d.PlaylistId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_PlaylistTrackPlaylistId");
-
-                entity.HasOne(d => d.Track)
-                    .WithMany(p => p.PlaylistTracks)
-                    .HasForeignKey(d => d.TrackId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_PlaylistTrackTrackId");
-            });
-
             modelBuilder.Entity<Track>(entity =>
             {
                 entity.ToTable("Track");
@@ -262,26 +151,13 @@ namespace Chinook.Data
 
                 entity.Property(e => e.UnitPrice).HasColumnType("numeric(10, 2)");
 
-                entity.HasOne(d => d.Album)
-                    .WithMany(p => p.Tracks)
-                    .HasForeignKey(d => d.AlbumId)
-                    .HasConstraintName("FK_TrackAlbumId");
 
                 entity.HasOne(d => d.Genre)
                     .WithMany(p => p.Tracks)
                     .HasForeignKey(d => d.GenreId)
                     .HasConstraintName("FK_TrackGenreId");
-
-                entity.HasOne(d => d.MediaType)
-                    .WithMany(p => p.Tracks)
-                    .HasForeignKey(d => d.MediaTypeId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_TrackMediaTypeId");
             });
-
-            OnModelCreatingPartial(modelBuilder);
         }
-
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
     }
 }

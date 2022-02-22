@@ -10,9 +10,7 @@ namespace Chinook.Domain.Models
         public Track()
         {
             InvoiceLines = new HashSet<InvoiceLine>();
-            PlaylistTracks = new HashSet<PlaylistTrack>();
         }
-
         public int TrackId { get; set; }
         public string Name { get; set; }
         public int? AlbumId { get; set; }
@@ -22,11 +20,7 @@ namespace Chinook.Domain.Models
         public int Milliseconds { get; set; }
         public int? Bytes { get; set; }
         public decimal UnitPrice { get; set; }
-
-        public virtual Album Album { get; set; }
         public virtual Genre Genre { get; set; }
-        public virtual MediaType MediaType { get; set; }
         public virtual ICollection<InvoiceLine> InvoiceLines { get; set; }  // to InvoiceLines
-        public virtual ICollection<PlaylistTrack> PlaylistTracks { get; set; }
     }
 }

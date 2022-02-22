@@ -22,7 +22,7 @@ namespace Chinook.Domain.Models
         public string BillingPostalCode { get; set; }
         public decimal Total { get; set; }
 
-        public virtual Customer Customer { get; set; } // to customer == goaaal
-        public virtual ICollection<InvoiceLine> InvoiceLines { get; set; } // from invoicelines
+        public virtual Customer Customer { get; set; } 
+        public virtual ICollection<InvoiceLine> InvoiceLines { get; set; } 
     }
 }

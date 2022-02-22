@@ -22,7 +22,7 @@ namespace Chinook
 
             // repo.DisplayCustomerToConsoleById(5);                //2
 
-            // repo.DisplayCustomerToConsoleByFirstName("a");       //3 A 
+            // repo.DisplayCustomerToConsoleByFirstName("He");       //3 A 
 
             // repo.DisplayCustomersToConsoleByFirstName("a");      //3 B
 

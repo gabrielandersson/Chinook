@@ -22,7 +22,6 @@ namespace Chinook.Domain.Models
         public string Email { get; set; }
         public int? SupportRepId { get; set; }
 
-        public virtual Employee SupportRep { get; set; }
         public virtual ICollection<Invoice> Invoices { get; set; }
     }
 }
